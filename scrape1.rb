@@ -1,7 +1,8 @@
 require "nokogiri"
 require "open-uri"
+require './details'
                
-@base_url = "http://tracks4africa.co.za"
+# @base_url is set in 'details.rb'
 @sites = []
 
 def get_related_result_pages(initial_url)
