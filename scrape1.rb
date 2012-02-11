@@ -2,12 +2,13 @@ require "nokogiri"
 require "open-uri"
                
 @base_url = "http://tracks4africa.co.za"
+@sites = {}
 
 def get_all_related_search_result_pages(initial_url)
   pages = [initial_url]
 
-  until get_next_search_page(pages.last) == "End"
-    pages << get_next_search_page(pages.last)
+  until get_next_link(pages.last) == "End"
+    pages << get_next_link(pages.last)
   end
 
   puts "Done - got all search result pages"
@@ -40,10 +41,12 @@ def get_ids_from_page(page_url)
 end
 
 def get_attributes_from_all_pages(pages)
+  sites = []
   pages.each do |page_url|
-    ids = get_ids_from_search_result_page(page_url)
-    get_attributes_from_ids_list(ids)
-  end
+    ids = get_ids_from_page(page_url)
+    sites << get_attributes_from_ids_list(ids)
+  end       
+  sites
 end
 
 def get_attributes_from_ids_list(ids_list=(149900..149904).to_a)
@@ -81,8 +84,25 @@ def extract_lon_lat(id)
   end
 end              
 
+def get_attributes_from_initial_page(page_url) 
+  # The page needs to come from a filtered search, i.e. 'country' and 'type', rather than free search
+  pages = get_all_related_search_result_pages(page_url)
+  results = get_attributes_from_all_pages(pages)
+  # puts results
+  write_csv(results)
+  results
+end  
 
-# get_attributes_from_ids_list
-# ids = get_ids_from_search_result_page("/listings/advanced_search/?csrfmiddlewaretoken=c5a8cffb6582ffaa050a0eb0b1993ec5&advanced_search=1&searching=1&offset=0&spatial_id=&search_text=&country=BW&region=Okavango%2FMoremi&city=&category=11&subcategory=")
-# get_attributes_from_ids_list(ids)
-# get_all_related_search_result_pages "/listings/advanced_search/?csrfmiddlewaretoken=c5a8cffb6582ffaa050a0eb0b1993ec5&advanced_search=1&searching=1&offset=0&spatial_id=&search_text=&country=BW&region=Okavango%2FMoremi&city=&category=11&subcategory="
+def write_csv(data)
+  doc = File.open('sites.csv', 'w')
+  data.each do |line|
+    line.each do |record|
+      doc << record
+    end
+  end
+  doc.close          
+end
+
+# URL for 62 lodges in Delta "/listings/advanced_search/?csrfmiddlewaretoken=c5a8cffb6582ffaa050a0eb0b1993ec5&advanced_search=1&searching=1&offset=0&spatial_id=&search_text=&country=BW&region=Okavango%2FMoremi&city=&category=11&subcategory="
+
+# URL for 3 hotels in Delta "/listings/advanced_search/?csrfmiddlewaretoken=c5a8cffb6582ffaa050a0eb0b1993ec5&advanced_search=1&searching=1&offset=0&spatial_id=&search_text=&country=BW&region=Okavango%2FMoremi&city=&category=11&subcategory=296"
