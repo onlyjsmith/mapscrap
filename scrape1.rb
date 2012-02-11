@@ -2,9 +2,9 @@ require "nokogiri"
 require "open-uri"
                
 @base_url = "http://tracks4africa.co.za"
-@sites = {}
+@sites = []
 
-def get_all_related_search_result_pages(initial_url)
+def get_related_result_pages(initial_url)
   pages = [initial_url]
 
   until get_next_link(pages.last) == "End"
@@ -40,23 +40,26 @@ def get_ids_from_page(page_url)
   ids
 end
 
-def get_attributes_from_all_pages(pages)
-  sites = []
+def get_attributes_from_pages(pages)
+  # sites = []
   pages.each do |page_url|
     ids = get_ids_from_page(page_url)
-    sites << get_attributes_from_ids_list(ids)
+    # sites << get_attributes_from_ids_list(ids)
+    get_attributes_from_ids_list(ids)
   end       
-  sites
-end
+  # sites
+end    
 
 def get_attributes_from_ids_list(ids_list=(149900..149904).to_a)
-  sites = {}
+  sites = []
   ids_list.each do |id|
     begin 
       doc = Nokogiri::HTML(open("#{@base_url}/listings/item/w#{id}/"))
-      print "Getting site ##{id}..."
-      sites[id] = [extract_name(doc), extract_lon_lat(id)]
-      puts "#{sites[id]}"
+      puts "Getting site ##{id}..."   
+      coords = extract_lon_lat(id) 
+      puts coords
+      @sites << [id, extract_name(doc), coords[:lon], coords[:lat]]
+      # puts "#{sites[id]}"
     rescue 
       puts "ID #{id}   something broke - could be a 404" 
       next
@@ -68,7 +71,7 @@ def get_attributes_from_ids_list(ids_list=(149900..149904).to_a)
 end
 
 def extract_name(doc)
-  doc.css("h2 .listing-detail-heading").text
+  doc.css("h2 .listing-detail-heading").text.gsub(/\,/,"")
 end
 
 def extract_lon_lat(id)
@@ -84,24 +87,23 @@ def extract_lon_lat(id)
   end
 end              
 
-def get_attributes_from_initial_page(page_url) 
-  # The page needs to come from a filtered search, i.e. 'country' and 'type', rather than free search
-  pages = get_all_related_search_result_pages(page_url)
-  results = get_attributes_from_all_pages(pages)
-  # puts results
-  write_csv(results)
-  results
-end  
-
 def write_csv(data)
   doc = File.open('sites.csv', 'w')
-  data.each do |line|
-    line.each do |record|
-      doc << record
-    end
+  data.each do |record|
+    doc << "#{record[0]},#{record[1]},#{record[2]},#{record[3]}\n"
   end
   doc.close          
 end
+
+def do_it_all(page_url) 
+  # The page needs to come from a filtered search, i.e. 'country' and 'type', rather than free search
+  pages_to_parse = get_related_result_pages(page_url)
+  get_attributes_from_pages(pages_to_parse)
+  write_csv(@sites)
+  @sites
+end                                                                         
+
+do_it_all ARGV[0] 
 
 # URL for 62 lodges in Delta "/listings/advanced_search/?csrfmiddlewaretoken=c5a8cffb6582ffaa050a0eb0b1993ec5&advanced_search=1&searching=1&offset=0&spatial_id=&search_text=&country=BW&region=Okavango%2FMoremi&city=&category=11&subcategory="
 
