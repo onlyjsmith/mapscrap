@@ -1,0 +1,55 @@
+Abu Camp,Botswana Okavango Delta
+Andersson's Camp,Namibia Etosha
+Banoka Bush Camp,Botswana Okavango Delta
+Busanga Bush Camp,Zambia Kafue
+Chelinda Camp,Malawi Nyika Plateau
+Chelinda Lodge,Malawi Nyika Plateau
+Chintheche Inn,Malawi Lake Malawi
+Chitabe Camp,Botswana Okavango Delta
+Chitabe Lediba,Botswana Okavango Delta
+Damaraland Camp,Namibia Kunene
+Davison's Camp,Zimbabwe Hwange
+Desert Rhino Camp,Namibia Kunene
+Doro Nawas Camp,Namibia Kunene
+Duba Plains,Botswana Okavango Delta
+DumaTau Camp,Botswana Linyanti Selinda
+Jacana Camp,Botswana Okavango Delta
+Jao Camp,Botswana Okavango Delta
+Kalahari Plains Camp,Botswana Kalahari
+Kalamu Lagoon Camp ,Zambia South Luangwa
+Kings Pool Camp,Botswana Linyanti Selinda
+Kulala Desert Lodge,Namibia Sossusvlei
+Kulala Wilderness Camp,Namibia Sossusvlei
+Kwetsani Camp,Botswana Okavango Delta
+Little Kulala,Namibia Sossusvlei
+Little Makalolo Camp,Zimbabwe Hwange
+Little Mombo Camp,Botswana Okavango Delta
+Little Ongava,Namibia Etosha
+Little Vumbura,Botswana Okavango Delta
+Makalolo Plains Camp,Zimbabwe Hwange
+Mombo Camp,Botswana Okavango Delta
+Mumbo Island Camp,Malawi Lake Malawi
+Mvuu Camp,Malawi Liwonde
+Mvuu Lodge,Malawi Liwonde
+North Island,Seychelles
+Odzala Camps,Congo Odzala Kokoua
+Ongava Lodge,Namibia Etosha
+Ongava Tented Camp,Namibia Etosha
+Pafuri Camp,South Africa Kruger National Park
+Pafuri Walking Trail,South Africa Kruger National Park
+Palmwag Lodge,Namibia Kunene
+Rocktail Beach Camp,South Africa Maputaland
+Ruckomechi Camp,Zimbabwe Mana Pools
+Savuti Camp,Botswana Linyanti Selinda
+Seba Camp,Botswana Okavango Delta
+Segera,Kenya Laikipia
+Selinda Camp,Botswana Linyanti Selinda
+Serra Cafema,Namibia Kunene
+Shumba Camp,Zambia Kafue
+Skeleton Coast Camp,Namibia Kunene
+The River Club,Zambia Victoria Falls
+Toka Leya Camp,Zambia Victori Falls
+Tubu Tree Camp,Botswana Okavango Delta
+Vumbura Plains,Botswana Okavango Delta
+Xigera Camp,Botswana Okavango Delta
+Zarafa Camp,Botswana Linyanti Selinda
